@@ -4,24 +4,24 @@
 # VARIABLE BLOCK
 #########################################################
 variable "bucket_name" {
-    description = "to name bucket"
-    type = list
-    default = [
-        "backend-0131-",        
-    ]
-  
+  description = "to name bucket"
+  type        = list(any)
+  default = [
+    "backend-0131-",
+  ]
+
 }
 
 variable "region" {
-    description = "passing the region"
-    type = string
-    default = "us-east-1"
-  
+  description = "passing the region"
+  type        = string
+  default     = "us-east-1"
+
 }
 
 variable "aws_profile" {
-    description = "to pass profile"
-    type = string
-    default = "iamadmin"
-  
+  description = "to pass profile"
+  type        = string
+  default     = "iamadmin"
+
 }

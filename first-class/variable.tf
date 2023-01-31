@@ -25,7 +25,7 @@ variable "public_subnet_cidr" {
 variable "private_subnet_cidr" {
   description = "private ip cidr"
   type        = list(any)
-  default     = ["10.0.2.0/24", "10.0.3.0/24", "10.0.4.0/24", "10.0.5.0/24" ]
+  default     = ["10.0.2.0/24", "10.0.3.0/24", "10.0.4.0/24", "10.0.5.0/24"]
 
 }
 

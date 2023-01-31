@@ -17,22 +17,22 @@ terraform {
 # RESOURCE BLOCK
 #########################################################
 resource "aws_s3_bucket" "bucket" {
-    count = length(var.bucket_name)
-    bucket = "${var.bucket_name[count.index]}-lekan-kesh-buck"
+  count  = length(var.bucket_name)
+  bucket = "${var.bucket_name[count.index]}-lekan-kesh-buck"
 
-    tags = {
-      name = "bucket_${count.index + 1}"
-    }
-  
+  tags = {
+    name = "bucket_${count.index + 1}"
+  }
+
 }
 
 resource "aws_dynamodb_table" "basic-dynamodb-table" {
-  name           = "terraform-lock"
-  
+  name = "terraform-lock"
+
   read_capacity  = 20
   write_capacity = 20
   hash_key       = "LockID"
-  
+
 
   attribute {
     name = "LockID"

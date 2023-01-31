@@ -4,6 +4,6 @@
 # PROVIDER BLOCK
 #########################################################
 provider "aws" {
-    region = "us-east-1"
-    profile = "iamadmin"  
+  region  = "us-east-1"
+  profile = "iamadmin"
 }
