@@ -40,11 +40,10 @@ resource "aws_subnet" "public_subnet" {
 }
 
 resource "aws_subnet" "private_app_subnet" {
-  for_each                = local.private_app_subnet
-  vpc_id                  = aws_vpc.dev_vpc.id
-  cidr_block              = each.value.cidr
-  availability_zone       = each.value.azs_to_use
-  map_public_ip_on_launch = true
+  for_each          = local.private_app_subnet
+  vpc_id            = aws_vpc.dev_vpc.id
+  cidr_block        = each.value.cidr
+  availability_zone = each.value.azs_to_use
 
   tags = {
     Name = each.key
@@ -52,11 +51,10 @@ resource "aws_subnet" "private_app_subnet" {
 }
 
 resource "aws_subnet" "database_subnet" {
-  for_each                = local.database_subnet
-  vpc_id                  = aws_vpc.dev_vpc.id
-  cidr_block              = each.value.cidr
-  availability_zone       = each.value.azs_to_use
-  map_public_ip_on_launch = true
+  for_each          = local.database_subnet
+  vpc_id            = aws_vpc.dev_vpc.id
+  cidr_block        = each.value.cidr
+  availability_zone = each.value.azs_to_use
 
   tags = {
     Name = each.key
