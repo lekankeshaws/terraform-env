@@ -8,6 +8,7 @@ variable "bucket_name" {
   type        = list(any)
   default = [
     "backend-0131-",
+    "backend-0201",
   ]
 
 }
