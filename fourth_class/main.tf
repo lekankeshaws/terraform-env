@@ -29,7 +29,7 @@ resource "aws_vpc" "dev_vpc" {
 resource "aws_subnet" "public_subnet" {
   for_each = local.public_subnet
 
-  vpc_id                  = aws_vpc.dev_vpc.id
+  vpc_id                  = local.vpc_id
   cidr_block              = each.value.cidr
   availability_zone       = each.value.azs_to_use
   map_public_ip_on_launch = true
@@ -41,7 +41,7 @@ resource "aws_subnet" "public_subnet" {
 
 resource "aws_subnet" "private_app_subnet" {
   for_each          = local.private_app_subnet
-  vpc_id            = aws_vpc.dev_vpc.id
+  vpc_id            = local.vpc_id
   cidr_block        = each.value.cidr
   availability_zone = each.value.azs_to_use
 
@@ -52,7 +52,7 @@ resource "aws_subnet" "private_app_subnet" {
 
 resource "aws_subnet" "database_subnet" {
   for_each          = local.database_subnet
-  vpc_id            = aws_vpc.dev_vpc.id
+  vpc_id            = local.vpc_id
   cidr_block        = each.value.cidr
   availability_zone = each.value.azs_to_use
 
@@ -65,7 +65,7 @@ resource "aws_security_group" "server_sg" {
 
   name        = "server security group"
   description = "allow ssh & ping inbound traffic"
-  vpc_id      = aws_vpc.dev_vpc.id
+  vpc_id      = local.vpc_id
 
   ingress {
     description = "ssh from vpc"
@@ -93,5 +93,31 @@ resource "aws_security_group" "server_sg" {
   tags = {
     Name = "server_sg"
   }
+}
+
+resource "aws_route_table" "public_route_table" {
+  vpc_id = local.vpc_id
+
+  route {
+    cidr_block = var.public_subnet_cidr
+    gateway_id = aws_internet_gateway.igw.id
+  }
+
+  tags = {
+    Name = "public_route_table"
+  }
+}
+
+resource "aws_internet_gateway" "igw" {
+  vpc_id = local.vpc_id
+
+  tags = {
+    Name = "igw"
+  }
+}
+
+resource "aws_main_route_table_association" "rt_table_ass" {
+  vpc_id         = local.vpc_id
+  route_table_id = aws_route_table.public_route_table.id
 }
 

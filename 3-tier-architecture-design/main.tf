@@ -185,7 +185,7 @@ resource "aws_nat_gateway" "ngw" {
 
   # To ensure proper ordering, it is recommended to add an explicit dependency
   # on the Internet Gateway for the VPC.
-  
+
 }
 
 #########################################################
@@ -195,5 +195,5 @@ resource "aws_nat_gateway" "ngw" {
 resource "aws_eip" "eip" {
   depends_on = [aws_internet_gateway.igw]
 
-  vpc      = true
+  vpc = true
 }

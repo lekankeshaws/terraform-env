@@ -5,6 +5,7 @@
 #########################################################
 locals {
   azs = data.aws_availability_zones.available.names
+  vpc_id = aws_vpc.dev_vpc.id
 
   ec2_instance = {
     server_1 = {
@@ -23,7 +24,7 @@ locals {
 
   public_subnet = {
     public_subnet_1 = {
-      cidr       = "10.0.1.0/24"
+      cidr       = var.public_subnet_cidr
       azs_to_use = local.azs[0]
     }
     public_subnet_2 = {

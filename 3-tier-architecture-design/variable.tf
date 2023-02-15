@@ -1,5 +1,7 @@
 
-
+#########################################################
+# VARIABLE FOR VPC & SUBNET
+#########################################################
 variable "region" {
   description = "passing the region"
   type        = string
@@ -33,4 +35,47 @@ variable "database_subnet_cidr" {
   description = "passing the cidr for the database subnet"
   type        = list(any)
 
+}
+
+variable "instance_type" {
+  description = "passing instance type"
+  type        = string
+}
+
+#########################################################
+# VARIABLE FOR DATABASE
+#########################################################
+
+variable "username" {
+  type        = string
+  description = "db username"
+}
+
+variable "port" {
+  type        = number
+  description = "db port number"
+  default     = 3306
+}
+
+variable "db_name" {
+  type        = string
+  description = "db name"
+  default     = "webappdb"
+}
+
+variable "instance_class" {
+  type        = string
+  description = "db instance class"
+
+}
+
+#########################################################
+# VARIABLE FOR SECURITY GROUP
+#########################################################
+
+variable "dns_name" {
+    type = string
+    description = "vaue of our dns name"
+    default = "keshinro.link"
+  
 }

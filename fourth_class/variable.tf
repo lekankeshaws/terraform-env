@@ -28,3 +28,10 @@ variable "cidr_block_ssh" {
   default     = "0.0.0.0/0"
 
 }
+
+variable "public_subnet_cidr" {
+  type = list
+  description = "passing the public subnet cidr"
+  default = ["10.0.1.0/24"]
+  
+}
