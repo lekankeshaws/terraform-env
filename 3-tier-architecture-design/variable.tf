@@ -70,12 +70,17 @@ variable "instance_class" {
 }
 
 #########################################################
-# VARIABLE FOR SECURITY GROUP
+# VARIABLE FOR DNS
 #########################################################
 
 variable "dns_name" {
-    type = string
-    description = "vaue of our dns name"
-    default = "keshinro.link"
-  
+  type        = string
+  description = "vaue of our dns name"
+
+}
+
+variable "subject_alternative_names" {
+  type        = list(any)
+  description = "passing the subject alternative domain names"
+
 }

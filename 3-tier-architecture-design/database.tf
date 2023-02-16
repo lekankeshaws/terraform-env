@@ -37,7 +37,7 @@ locals {
 
 resource "aws_db_subnet_group" "this" {
   name       = "database subnet"
-  subnet_ids = [aws_subnet.database_subnet[0].id]
+  subnet_ids = aws_subnet.database_subnet.*.id
 
   tags = {
     Name = "My DB subnet group"

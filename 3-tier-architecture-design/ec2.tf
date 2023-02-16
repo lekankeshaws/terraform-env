@@ -32,7 +32,7 @@ resource "aws_instance" "app1" {
   instance_type          = var.instance_type
   subnet_id              = aws_subnet.backend_subnet[0].id
   iam_instance_profile   = aws_iam_instance_profile.instance_profile.name
-  user_data              = "${path.module}/templates/app1.sh"
+  user_data              = file("${path.module}/templates/app1.sh")
   vpc_security_group_ids = [aws_security_group.security["app1_sg"].id]
 
   tags = {
@@ -49,7 +49,7 @@ resource "aws_instance" "app2" {
   instance_type          = var.instance_type
   subnet_id              = aws_subnet.backend_subnet[1].id
   iam_instance_profile   = aws_iam_instance_profile.instance_profile.name
-  user_data              = "${path.module}/templates/app2.sh"
+  user_data              = file("${path.module}/templates/app2.sh")
   vpc_security_group_ids = [aws_security_group.security["app2_sg"].id]
 
   tags = {
@@ -67,16 +67,17 @@ resource "aws_instance" "registration_app" {
   ami                    = data.aws_ami.ami_amazon.id
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.security["registration_sg"].id]
-  subnet_id              = aws_subnet.backend_subnet[0].id
+  subnet_id              = aws_subnet.database_subnet[0].id
   iam_instance_profile   = aws_iam_instance_profile.instance_profile.name
   user_data = templatefile("${path.root}/templates/registration_app.tmpl",
     {
       hostname    = aws_db_instance.registration_app_db.address
+      db_port     = var.port
       db_name     = var.db_name
       db_username = var.username
       db_password = random_password.password.result
-      db_port     = var.port
-  })
+    }
+  )
 
   tags = {
     Name = "${terraform.workspace}-registration_app"
