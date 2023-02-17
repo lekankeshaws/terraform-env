@@ -84,3 +84,25 @@ variable "subject_alternative_names" {
   description = "passing the subject alternative domain names"
 
 }
+
+#########################################################
+# VARIABLE FOR ALB
+#########################################################
+
+variable "health_path" {
+  type        = list(string)
+  description = "passing the path for alb"
+
+}
+
+variable "rule_value" {
+  type        = list(string)
+  description = "passing https rule values"
+}
+
+variable "alb_priority" {
+  type        = list(any)
+  description = "passing priority"
+  default     = [1, 2]
+
+}

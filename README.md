@@ -43,7 +43,7 @@ When working with for key, if you are trying to output a resource you would need
 
 for_each works best with local but if you are creating a module it is best practice to use variable block to create your for_each.
 
-To output all the attribute in a particular list of resources you would need to iterate for example: value = [for id in aws_subnet.public_subnet: id.id] where id can be any given variable.
+To output all the attribute in a particular list of resources you would need to iterate for example: value = [for id in aws_subnet.public_subnet: id.id] / [for subnet in aws_subnet.public_subnet : subnet.id] where id can be any given variable.
 
 You can also out all attribute in a particular list of resouces using value = values(aws_iam_user.example)[*].arn.
 
