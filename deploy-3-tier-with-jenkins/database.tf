@@ -38,7 +38,7 @@ locals {
 
 resource "aws_db_subnet_group" "this" {
   name       = "database subnet"
-  subnet_ids = aws_subnet.database_subnet.*.id
+  subnet_ids = module.vpc.database_subnet_id
 
   tags = {
     Name = "My DB subnet group"

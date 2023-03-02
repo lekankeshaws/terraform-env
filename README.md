@@ -12,6 +12,9 @@ My terraform journey
 - terraform fmt --recursive
 - terraform output
 - terraform show -json tf.plan > tf.plan.json
+- terraform state list
+- terraform state rm
+- terraform init reconfigure (used to move state file, when backend has been changed)
 
 # Data types in Terraform
 Data types in Terraform
@@ -25,7 +28,7 @@ bool = True/False
 [{}]	list(map)
 {[]}	map(list)
 
-# Types of (Root/Child)
+# Types of Module (Root/Child)
 # Classes of Modules( public / private modules)
 # Modules that built specific company (stored in github)
 # Public modules are https://github.com/terraform-aws-modules
@@ -48,5 +51,12 @@ To output all the attribute in a particular list of resources you would need to 
 You can also out all attribute in a particular list of resouces using value = values(aws_iam_user.example)[*].arn.
 
 # function documentation https://developer.hashicorp.com/terraform/language/functions
+
+# Module
+When calling a module use git::https://github/<repo id>/<repo name>.git e.g: git::https://github.com/lekankeshaws/vpc-module.git
+When calling a module with tags use git::https://github/<repo id>/<repo name>.git?ref=<tag name> e.g: git::https://github.com/lekankeshaws/vpc-module.git?ref=v.1.0.0
+
+# Drift
+A drift in terraform is when a resource has been manually deleted from the console and still exist in the "terraform state list", you can handle/manage a drift by removing the resource with the terraform state rm <resource name and logical name> e.g "terraform state rm aws_vpc.this"
 
 

@@ -9,6 +9,7 @@ variable "bucket_name" {
   default = [
     "backend-0131-",
     "backend-0201",
+    "backend-0301",
   ]
 
 }
@@ -25,4 +26,14 @@ variable "aws_profile" {
   type        = string
   default     = "iamadmin"
 
+}
+
+variable "account_role_arns" {
+  type = list
+  description = "passing arn for bucket policy roles"
+  default = [
+    "arn:aws:iam::911070830892:role/cross-account-terraform-role",
+    "arn:aws:iam::285687660873:role/cross-account-terraform-role",
+    "arn:aws:iam::380274938814:role/cross-account-terraform-role",
+  ]
 }
